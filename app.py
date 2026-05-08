@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import joblib
+import pickle
 import matplotlib.pyplot as plt
 import seaborn as sns
 from reportlab.lib.pagesizes import A4
@@ -36,8 +36,8 @@ st.title("🧠 EEG Autism Detection System")
 st.markdown("### ALDaayen School for Girls")
 
 # ================== LOAD MODEL ==================
-model = joblib.load("autism_model.pkl")
-
+with open("autism_model.pkl", "rb") as f:
+    model = pickle.load(f)
 FEATURE_COLS = [f"ch{i}" for i in range(1, 17)]
 HELMET_TO_CH = {
     "FP1":"ch1","FP2":"ch2","F3":"ch3","F4":"ch4","FZ":"ch5","CZ":"ch6",
