@@ -1,3 +1,15 @@
+import sys
+import subprocess
+
+def ensure_package(pkg):
+    try:
+        __import__(pkg)
+    except ModuleNotFoundError:
+        subprocess.check_call([sys.executable, "-m", "pip", "install", pkg])
+
+# Ensure required packages
+for p in ["numpy", "pandas", "matplotlib", "seaborn", "reportlab"]:
+    ensure_package(p)
 import streamlit as st
 import pandas as pd
 import numpy as np
